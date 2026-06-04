@@ -11,13 +11,13 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 <body>
-
+ 
   <!-- ============================================================
        NAVIGATION BAR
   ============================================================ -->
   <nav id="navbar">
     <div class="nav-inner">
-      <a href="#home" class="nav-logo"><span class="glow-text">KVR</span>
+      <a href="#home" class="nav-logo"><span class="glow-text">KVR</span><span class="dot">.</span></a>
       <ul class="nav-links" id="navLinks">
         <li><a href="#home">Home</a></li>
         <li><a href="#about">About</a></li>
@@ -33,35 +33,35 @@
       </button>
     </div>
   </nav>
-
+ 
   <!-- ============================================================
        HERO SECTION
   ============================================================ -->
   <section id="home" class="hero">
     <!-- Particle canvas background -->
     <canvas id="particleCanvas"></canvas>
-
+ 
     <div class="hero-content fade-in">
       <div class="hero-badge">B.Tech CSE Student</div>
       <h1 class="hero-name"><span class="glow-text">Karri Varshith Reddy</span></h1>
       <p class="hero-university">IIITDM Kancheepuram</p>
-
+ 
       <!-- Typing animation -->
       <div class="typing-wrapper">
         <span class="typing-prefix">&gt;_ </span>
         <span id="typingText" class="typing-text"></span>
         <span class="cursor">|</span>
       </div>
-
+ 
       <p class="hero-desc">
         A passionate Computer Science student exploring software development,
         problem solving, and modern technologies while continuously learning
         and improving technical skills.
       </p>
-
+ 
       <div class="hero-buttons">
         <!-- Replace YOUR_RESUME_PDF_LINK with your hosted resume PDF URL (Google Drive, Dropbox, etc.) -->
-        <a href="resume.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-primary" id="resumeBtn">
+        <a href="YOUR_RESUME_PDF_LINK" target="_blank" rel="noopener noreferrer" class="btn btn-primary" id="resumeBtn">
           <i class="fas fa-eye"></i> View Resume
         </a>
         <a href="#skills" class="btn btn-secondary">
@@ -72,7 +72,7 @@
         </a>
       </div>
     </div>
-
+ 
     <!-- Decorative grid lines -->
     <div class="hero-grid"></div>
     <!-- Scroll indicator -->
@@ -80,7 +80,7 @@
       <div class="scroll-dot"></div>
     </div>
   </section>
-
+ 
   <!-- ============================================================
        ABOUT SECTION
   ============================================================ -->
@@ -91,7 +91,7 @@
         <h2 class="section-title">About <span class="glow-text">Me</span></h2>
         <div class="section-line"></div>
       </div>
-
+ 
       <div class="about-grid">
         <!-- Avatar card -->
         <div class="about-avatar-card reveal">
@@ -107,7 +107,7 @@
             <span class="status-dot"></span> Available for Opportunities
           </div>
         </div>
-
+ 
         <!-- Info cards -->
         <div class="about-info">
           <div class="info-card reveal">
@@ -142,7 +142,7 @@
       </div>
     </div>
   </section>
-
+ 
   <!-- ============================================================
        EDUCATION SECTION
   ============================================================ -->
@@ -153,9 +153,9 @@
         <h2 class="section-title">Edu<span class="glow-text">cation</span></h2>
         <div class="section-line"></div>
       </div>
-
+ 
       <div class="timeline">
-
+ 
         <!-- School -->
         <div class="timeline-item reveal">
           <div class="timeline-dot"></div>
@@ -166,7 +166,7 @@
             <div class="score-pill">Score: <strong>94%</strong></div>
           </div>
         </div>
-
+ 
         <!-- Intermediate -->
         <div class="timeline-item reveal">
           <div class="timeline-dot"></div>
@@ -177,7 +177,7 @@
             <div class="score-pill">Score: <strong>91%</strong></div>
           </div>
         </div>
-
+ 
         <!-- University -->
         <div class="timeline-item reveal">
           <div class="timeline-dot timeline-dot-active"></div>
@@ -188,7 +188,7 @@
             <div class="score-pill">Expected Graduation: <strong>2029</strong></div>
           </div>
         </div>
-
+ 
         <!-- Achievement -->
         <div class="timeline-item reveal">
           <div class="timeline-dot timeline-dot-gold"></div>
@@ -199,11 +199,11 @@
             <div class="score-pill">CRL Rank: <strong>22250</strong></div>
           </div>
         </div>
-
+ 
       </div>
     </div>
   </section>
-
+ 
   <!-- ============================================================
        SKILLS SECTION
   ============================================================ -->
@@ -214,7 +214,7 @@
         <h2 class="section-title">Tech <span class="glow-text">Skills</span></h2>
         <div class="section-line"></div>
       </div>
-
+ 
       <div class="skills-grid">
         <!-- C -->
         <div class="skill-card reveal">
@@ -282,7 +282,7 @@
       </div>
     </div>
   </section>
-
+ 
   <!-- ============================================================
        PROJECTS SECTION
   ============================================================ -->
@@ -293,10 +293,10 @@
         <h2 class="section-title">Pro<span class="glow-text">jects</span></h2>
         <div class="section-line"></div>
       </div>
-
+ 
       <!-- Projects grid — add more .proj-card divs here for future projects -->
       <div class="proj-grid">
-
+ 
         <!-- PROJECT: Banking System in C -->
         <div class="proj-card reveal" data-project="banking">
           <div class="proj-card-inner">
@@ -316,13 +316,13 @@
           <div class="corner bl"></div>
           <div class="corner br"></div>
         </div>
-
+ 
         <!-- Add more project cards below this comment in future -->
-
+ 
       </div>
     </div>
   </section>
-
+ 
   <!-- ============================================================
        PROJECT MODAL — Banking System in C
        Opened when the project card is clicked
@@ -330,10 +330,10 @@
   <div id="modal-banking" class="proj-modal" role="dialog" aria-modal="true" aria-label="Banking System in C — Project Details">
     <div class="proj-modal-overlay"></div>
     <div class="proj-modal-box">
-
+ 
       <!-- Close button -->
       <button class="proj-modal-close" aria-label="Close modal"><i class="fas fa-times"></i></button>
-
+ 
       <!-- Header -->
       <div class="proj-modal-header">
         <div class="proj-modal-icon"><i class="fas fa-landmark"></i></div>
@@ -342,15 +342,15 @@
           <h2>Banking System in C</h2>
         </div>
       </div>
-
+ 
       <!-- Description -->
       <p class="proj-modal-desc">
         A Banking System project implemented in C using Hash Table with Linked List chaining for efficient account management.
       </p>
-
+ 
       <!-- Three columns: Features · Technologies · Learning -->
       <div class="proj-modal-cols">
-
+ 
         <div class="proj-modal-col">
           <h4><i class="fas fa-list-check"></i> Features</h4>
           <ul>
@@ -364,7 +364,7 @@
             <li>Collision handling using linked list</li>
           </ul>
         </div>
-
+ 
         <div class="proj-modal-col">
           <h4><i class="fas fa-microchip"></i> Technologies</h4>
           <ul>
@@ -373,7 +373,7 @@
             <li>Dynamic Memory Allocation (malloc)</li>
           </ul>
         </div>
-
+ 
         <div class="proj-modal-col">
           <h4><i class="fas fa-graduation-cap"></i> Learning Outcomes</h4>
           <ul>
@@ -382,9 +382,9 @@
             <li>Basic system design in C</li>
           </ul>
         </div>
-
+ 
       </div>
-
+ 
       <!-- GitHub link -->
       <div class="proj-modal-actions">
         <a href="https://github.com/varshithreddy1109/banking-system-project-c"
@@ -393,10 +393,10 @@
           <i class="fab fa-github"></i> View on GitHub
         </a>
       </div>
-
+ 
     </div>
   </div>
-
+ 
   <!-- ============================================================
        EXPERIENCE SECTION
   ============================================================ -->
@@ -407,7 +407,7 @@
         <h2 class="section-title">Exper<span class="glow-text">ience</span></h2>
         <div class="section-line"></div>
       </div>
-
+ 
       <div class="exp-coming-soon reveal">
         <div class="exp-soon-icon">
           <i class="fas fa-terminal"></i>
@@ -422,10 +422,10 @@
         <div class="corner bl"></div>
         <div class="corner br"></div>
       </div>
-
+ 
     </div>
   </section>
-
+ 
   <!-- ============================================================
        CERTIFICATES SECTION
   ============================================================ -->
@@ -436,7 +436,7 @@
         <h2 class="section-title">Certifi<span class="glow-text">cates</span></h2>
         <div class="section-line"></div>
       </div>
-
+ 
       <!-- Coming Soon Card — replace this block with real cert-cards when ready -->
       <div class="cert-coming-soon reveal">
         <div class="cert-soon-icon">
@@ -455,7 +455,7 @@
       </div>
     </div>
   </section>
-
+ 
   <!-- ============================================================
        CONTACT SECTION — Google Form embed
   ============================================================ -->
@@ -466,7 +466,7 @@
         <h2 class="section-title">Contact <span class="glow-text">Me</span></h2>
         <div class="section-line"></div>
       </div>
-
+ 
       <!-- Google Form wrapper -->
       <div class="gform-outer reveal">
         <div class="gform-card">
@@ -475,7 +475,7 @@
           <div class="corner tr"></div>
           <div class="corner bl"></div>
           <div class="corner br"></div>
-
+ 
           <div class="gform-inner">
             <iframe
               src="https://docs.google.com/forms/d/e/1FAIpQLSeAZ69ZbX6uzvN8PR6_O0B1Y6R7hHx-OQdqOXynQd2mipZWDQ/viewform?embedded=true"
@@ -490,10 +490,10 @@
           </div>
         </div>
       </div>
-
+ 
     </div>
   </section>
-
+ 
   <!-- ============================================================
        FOOTER
   ============================================================ -->
@@ -504,7 +504,7 @@
         <a href="https://github.com/varshithreddy1109" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="social-btn">
           <i class="fab fa-github"></i>
         </a>
-        <a href="https://www.linkedin.com/in/karri-varshith-reddy-107a1738b" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="social-btn">
+        <a href="https://www.linkedin.com/in/karri-varshith-reddy-326008414/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="social-btn">
           <i class="fab fa-linkedin-in"></i>
         </a>
         <a href="mailto:varshithreddy1206@gmail.com" aria-label="Email" class="social-btn">
@@ -514,7 +514,8 @@
       <p class="footer-tagline">Built with <span class="glow-text">passion</span> &amp; code.</p>
     </div>
   </footer>
-
+ 
   <script src="script.js"></script>
 </body>
 </html>
+ 
