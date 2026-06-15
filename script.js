@@ -278,3 +278,111 @@ const sectionObserver = new IntersectionObserver(
 );
 
 sections.forEach(s => sectionObserver.observe(s));
+
+/* ──────────────────────────────────────────────────────────
+   EXPERIENCE MODALS
+   ─────────────────────────────────────────────────────────
+   Each .exp-modal-card has data-exp="id". The matching modal
+   has id="expmodal-{id}". Works identically to project modals.
+   ────────────────────────────────────────────────────────── */
+function openExpModal(id) {
+  const modal = document.getElementById("expmodal-" + id);
+  if (!modal) return;
+  modal.classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+
+function closeExpModal(id) {
+  const modal = document.getElementById("expmodal-" + id);
+  if (!modal) return;
+  modal.classList.remove("open");
+  document.body.style.overflow = "";
+}
+
+document.querySelectorAll(".exp-modal-card").forEach(card => {
+  card.addEventListener("click", () => openExpModal(card.dataset.exp));
+});
+
+document.querySelectorAll(".exp-modal .exp-modal-overlay").forEach(overlay => {
+  overlay.addEventListener("click", () => {
+    const modal = overlay.closest(".exp-modal");
+    if (modal) closeExpModal(modal.id.replace("expmodal-", ""));
+  });
+});
+
+document.querySelectorAll(".exp-modal .exp-modal-close").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const modal = btn.closest(".exp-modal");
+    if (modal) closeExpModal(modal.id.replace("expmodal-", ""));
+  });
+});
+
+/* ──────────────────────────────────────────────────────────
+   CERTIFICATE MODALS
+   ─────────────────────────────────────────────────────────
+   Each .cert-modal-card has data-cert="id". The matching modal
+   has id="certmodal-{id}". Works identically to project modals.
+   Popup contains: institution, date, skills, description,
+   View Certificate button (always), View Badge button (optional).
+   ────────────────────────────────────────────────────────── */
+function openCertModal(id) {
+  const modal = document.getElementById("certmodal-" + id);
+  if (!modal) return;
+  modal.classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+
+function closeCertModal(id) {
+  const modal = document.getElementById("certmodal-" + id);
+  if (!modal) return;
+  modal.classList.remove("open");
+  document.body.style.overflow = "";
+}
+
+document.querySelectorAll(".cert-modal-card").forEach(card => {
+  card.addEventListener("click", () => openCertModal(card.dataset.cert));
+});
+
+document.querySelectorAll(".cert-modal .cert-modal-overlay").forEach(overlay => {
+  overlay.addEventListener("click", () => {
+    const modal = overlay.closest(".cert-modal");
+    if (modal) closeCertModal(modal.id.replace("certmodal-", ""));
+  });
+});
+
+document.querySelectorAll(".cert-modal .cert-modal-close").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const modal = btn.closest(".cert-modal");
+    if (modal) closeCertModal(modal.id.replace("certmodal-", ""));
+  });
+});
+
+// Add Escape key support for exp and cert modals
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") {
+    document.querySelectorAll(".exp-modal.open").forEach(modal => {
+      closeExpModal(modal.id.replace("expmodal-", ""));
+    });
+    document.querySelectorAll(".cert-modal.open").forEach(modal => {
+      closeCertModal(modal.id.replace("certmodal-", ""));
+    });
+  }
+});
+
+/* ──────────────────────────────────────────────────────────
+   CREDLY BADGE TOGGLE
+   Toggles the embedded badge panel inside a cert modal.
+   Called by: onclick="toggleCredlyBadge('google-ai')"
+   ────────────────────────────────────────────────────────── */
+function toggleCredlyBadge(id) {
+  const panel = document.getElementById("cert-badge-" + id);
+  const btn   = document.getElementById("certBadgeToggle-" + id);
+  if (!panel) return;
+  const isHidden = panel.style.display === "none";
+  panel.style.display = isHidden ? "block" : "none";
+  if (btn) {
+    btn.innerHTML = isHidden
+      ? '<i class="fas fa-shield-alt"></i> Hide Badge'
+      : '<i class="fas fa-shield-alt"></i> View Badge';
+  }
+}

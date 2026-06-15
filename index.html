@@ -407,24 +407,37 @@
         <h2 class="section-title">Exper<span class="glow-text">ience</span></h2>
         <div class="section-line"></div>
       </div>
- 
-      <div class="exp-coming-soon reveal">
-        <div class="exp-soon-icon">
-          <i class="fas fa-terminal"></i>
+
+      <!-- Experience grid — add .exp-modal-card divs here when you have experience -->
+      <div class="exp-grid">
+
+        <!-- PLACEHOLDER: Yet to be announced — replace with real exp-modal-card blocks when ready -->
+        <div class="exp-placeholder reveal">
+          <div class="exp-placeholder-icon">
+            <i class="fas fa-terminal"></i>
+          </div>
+          <h3>Yet to be Announced</h3>
+          <p>Currently building skills and exploring opportunities.<br/>Experience will be updated as the journey grows.</p>
+          <div class="placeholder-dots">
+            <span></span><span></span><span></span>
+          </div>
+          <div class="corner tl"></div>
+          <div class="corner tr"></div>
+          <div class="corner bl"></div>
+          <div class="corner br"></div>
         </div>
-        <h3>Experience Coming Soon</h3>
-        <p>Currently building skills and exploring opportunities.<br/>Experience will be updated as the journey grows.</p>
-        <div class="placeholder-dots">
-          <span></span><span></span><span></span>
-        </div>
-        <div class="corner tl"></div>
-        <div class="corner tr"></div>
-        <div class="corner bl"></div>
-        <div class="corner br"></div>
+
+        <!-- Add more exp-modal-card divs below for future experience entries -->
+
       </div>
- 
+
     </div>
   </section>
+
+  <!-- ============================================================
+       EXPERIENCE MODALS — place modals here (below experience section)
+       Each modal id must match data-exp="ID" on the card above
+  ============================================================ -->
  
   <!-- ============================================================
        CERTIFICATES SECTION
@@ -436,26 +449,109 @@
         <h2 class="section-title">Certifi<span class="glow-text">cates</span></h2>
         <div class="section-line"></div>
       </div>
- 
-      <!-- Coming Soon Card — replace this block with real cert-cards when ready -->
-      <div class="cert-coming-soon reveal">
-        <div class="cert-soon-icon">
-          <i class="fas fa-award"></i>
+
+      <!-- Certificates grid — add .cert-modal-card divs here when you have certificates -->
+      <div class="certs-modal-grid">
+
+        <!-- CERTIFICATE CARD: Google AI Essentials -->
+        <div class="cert-modal-card reveal" data-cert="google-ai">
+          <div class="cert-card-ribbon">
+            <i class="fas fa-certificate"></i>
+            <span class="cert-issuer-name">Coursera – Google</span>
+          </div>
+          <div class="cert-card-body">
+            <h4>Google AI Essentials</h4>
+            <p class="cert-card-date"><i class="fas fa-calendar-alt"></i> 2025</p>
+            <div class="cert-card-skills">
+              <span>Generative AI</span>
+              <span>Prompt Engineering</span>
+              <span>Responsible AI</span>
+            </div>
+          </div>
+          <div class="cert-card-footer">
+            <span class="cert-click-hint"><i class="fas fa-expand-alt"></i> View Details</span>
+          </div>
+          <div class="corner tl"></div>
+          <div class="corner tr"></div>
+          <div class="corner bl"></div>
+          <div class="corner br"></div>
         </div>
-        <h3>Coming Soon</h3>
-        <p>Certificates will be added soon.</p>
-        <div class="placeholder-dots">
-          <span></span><span></span><span></span>
-        </div>
-        <!-- Corner brackets (same style as Projects section) -->
-        <div class="corner tl"></div>
-        <div class="corner tr"></div>
-        <div class="corner bl"></div>
-        <div class="corner br"></div>
+
+        <!-- Add more cert-modal-card divs below for future certificates -->
+
       </div>
     </div>
   </section>
- 
+
+  <!-- ============================================================
+       CERTIFICATE MODALS — place modals here (below certificates section)
+       Each modal id must match data-cert="ID" on the card above
+  ============================================================ -->
+
+  <!-- CERTIFICATE MODAL: Google AI Essentials -->
+  <div id="certmodal-google-ai" class="cert-modal" role="dialog" aria-modal="true" aria-label="Google AI Essentials — Certificate Details">
+    <div class="cert-modal-overlay"></div>
+    <div class="cert-modal-box">
+
+      <button class="cert-modal-close" aria-label="Close modal"><i class="fas fa-times"></i></button>
+
+      <div class="cert-modal-header">
+        <div class="cert-modal-icon"><i class="fas fa-robot"></i></div>
+        <div>
+          <h2>Google AI Essentials</h2>
+          <div class="cert-modal-info-row">
+            <span class="cert-modal-info-item">
+              <i class="fas fa-university"></i> Coursera – Google
+            </span>
+            <span class="cert-modal-info-item">
+              <i class="fas fa-calendar-alt"></i> 2025
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="cert-modal-section">
+        <h4><i class="fas fa-code"></i> Skills Covered</h4>
+        <div class="cert-modal-skills-wrap">
+          <span>Artificial Intelligence</span>
+          <span>Generative AI</span>
+          <span>Prompt Engineering</span>
+          <span>AI Productivity Tools</span>
+          <span>Responsible AI Usage</span>
+        </div>
+      </div>
+
+      <div class="cert-modal-section">
+        <h4><i class="fas fa-file-alt"></i> About this Certificate</h4>
+        <p>
+          Completed a foundational course on Artificial Intelligence offered by Google through Coursera.
+          Gained practical understanding of AI concepts, generative AI tools, prompt engineering techniques,
+          responsible AI usage, and real-world applications of AI for productivity and problem-solving.
+        </p>
+      </div>
+
+      <div class="cert-modal-actions">
+        <a href="https://coursera.org/share/ce6bab0317080c19c5683e05c928095e"
+           target="_blank" rel="noopener noreferrer"
+           class="btn btn-primary">
+          <i class="fas fa-external-link-alt"></i> View Certificate
+        </a>
+        <button class="btn btn-badge" id="certBadgeToggle-google-ai" onclick="toggleCredlyBadge('google-ai')">
+          <i class="fas fa-shield-alt"></i> View Badge
+        </button>
+      </div>
+
+      <!-- Credly badge embed (hidden until toggled) -->
+      <div id="cert-badge-google-ai" class="cert-badge-embed" style="display:none; margin-top:24px; text-align:center;">
+        <div data-iframe-width="150" data-iframe-height="270"
+             data-share-badge-id="6904cd7f-b4b1-4bd6-bb10-653a9e990006"
+             data-share-badge-host="https://www.credly.com"></div>
+        <script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>
+      </div>
+
+    </div>
+  </div>
+
   <!-- ============================================================
        CONTACT SECTION — Google Form embed
   ============================================================ -->
@@ -504,7 +600,7 @@
         <a href="https://github.com/varshithreddy1109" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="social-btn">
           <img src="image/githublogo.svg" alt="GitHub" class="social-svg social-svg--github" />
         </a>
-        <a href="https://www.linkedin.com/in/karri-varshith-reddy-107a1738b" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="social-btn">
+        <a href="https://www.linkedin.com/in/karri-varshith-reddy-326008414/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="social-btn">
           <img src="image/linkedinlogo.svg" alt="LinkedIn" class="social-svg social-svg--linkedin" />
         </a>
         <a href="mailto:varshithreddy1206@gmail.com" aria-label="Email" class="social-btn">
@@ -518,4 +614,3 @@
   <script src="script.js"></script>
 </body>
 </html>
- 
