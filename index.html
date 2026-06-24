@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Karri Varshith Reddy | Portfolio</title>
   <link rel="stylesheet" href="style.css" />
-  <!-- Google Fonts: Orbitron (display) + Syne (body) -->
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- Google Fonts: Orbitron (display) + Syne (body) + JetBrains Mono (console) + Inter (clean) -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Syne:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <!-- Font Awesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
@@ -28,6 +28,19 @@
         <li><a href="#certificates">Certificates</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
+      <!-- Theme Switcher -->
+      <div class="theme-switcher" id="themeSwitcher" role="group" aria-label="Theme switcher">
+        <button class="theme-btn active" data-theme="default" title="Default — Neon Dark" aria-label="Default theme">
+          <span class="theme-icon">◈</span>
+        </button>
+        <button class="theme-btn" data-theme="console" title="Dev Console — Code Editor" aria-label="Dev Console theme">
+          <span class="theme-icon">&gt;_</span>
+        </button>
+        <button class="theme-btn" data-theme="clean" title="Clean Engineer — Light" aria-label="Clean Engineer theme">
+          <span class="theme-icon">◻</span>
+        </button>
+      </div>
+
       <button class="hamburger" id="hamburger" aria-label="Toggle menu">
         <span></span><span></span><span></span>
       </button>
@@ -477,6 +490,30 @@
           <div class="corner br"></div>
         </div>
 
+        <!-- CERTIFICATE CARD: Google Prompting Essentials -->
+        <div class="cert-modal-card reveal" data-cert="google-prompting">
+          <div class="cert-card-ribbon">
+            <i class="fas fa-certificate"></i>
+            <span class="cert-issuer-name">Coursera – Google</span>
+          </div>
+          <div class="cert-card-body">
+            <h4>Google Prompting Essentials</h4>
+            <p class="cert-card-date"><i class="fas fa-calendar-alt"></i> 2026</p>
+            <div class="cert-card-skills">
+              <span>Prompt Engineering</span>
+              <span>Prompt Design</span>
+              <span>Responsible AI</span>
+            </div>
+          </div>
+          <div class="cert-card-footer">
+            <span class="cert-click-hint"><i class="fas fa-expand-alt"></i> View Details</span>
+          </div>
+          <div class="corner tl"></div>
+          <div class="corner tr"></div>
+          <div class="corner bl"></div>
+          <div class="corner br"></div>
+        </div>
+
         <!-- Add more cert-modal-card divs below for future certificates -->
 
       </div>
@@ -545,6 +582,72 @@
       <div id="cert-badge-google-ai" class="cert-badge-embed" style="display:none; margin-top:24px; text-align:center;">
         <div data-iframe-width="150" data-iframe-height="270"
              data-share-badge-id="6904cd7f-b4b1-4bd6-bb10-653a9e990006"
+             data-share-badge-host="https://www.credly.com"></div>
+        <script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CERTIFICATE MODAL: Google Prompting Essentials -->
+  <div id="certmodal-google-prompting" class="cert-modal" role="dialog" aria-modal="true" aria-label="Google Prompting Essentials — Certificate Details">
+    <div class="cert-modal-overlay"></div>
+    <div class="cert-modal-box">
+
+      <button class="cert-modal-close" aria-label="Close modal"><i class="fas fa-times"></i></button>
+
+      <div class="cert-modal-header">
+        <div class="cert-modal-icon"><i class="fas fa-magic"></i></div>
+        <div>
+          <h2>Google Prompting Essentials</h2>
+          <div class="cert-modal-info-row">
+            <span class="cert-modal-info-item">
+              <i class="fas fa-university"></i> Coursera – Google
+            </span>
+            <span class="cert-modal-info-item">
+              <i class="fas fa-calendar-alt"></i> 2026
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="cert-modal-section">
+        <h4><i class="fas fa-code"></i> Skills Covered</h4>
+        <div class="cert-modal-skills-wrap">
+          <span>AI Agent Design</span>
+          <span>Multimodal Prompting</span>
+          <span>Prompt Chaining</span>
+          <span>Prompt Design</span>
+          <span>Prompt Evaluation &amp; Iteration</span>
+          <span>Responsible AI</span>
+        </div>
+      </div>
+
+      <div class="cert-modal-section">
+        <h4><i class="fas fa-file-alt"></i> About this Certificate</h4>
+        <p>
+          Completed the Google Prompting Essentials Specialization offered by Google through Coursera.
+          Gained practical understanding of prompt engineering techniques, designing effective prompts for
+          different tasks, using AI for productivity, data analysis, presentations, and leveraging AI as
+          a creative and expert partner for real-world applications.
+        </p>
+      </div>
+
+      <div class="cert-modal-actions">
+        <a href="https://coursera.org/share/0048147721c98651579770d5616f7af8"
+           target="_blank" rel="noopener noreferrer"
+           class="btn btn-primary">
+          <i class="fas fa-external-link-alt"></i> View Certificate
+        </a>
+        <button class="btn btn-badge" id="certBadgeToggle-google-prompting" onclick="toggleCredlyBadge('google-prompting')">
+          <i class="fas fa-shield-alt"></i> View Badge
+        </button>
+      </div>
+
+      <!-- Credly badge embed (hidden until toggled) -->
+      <div id="cert-badge-google-prompting" class="cert-badge-embed" style="display:none; margin-top:24px; text-align:center;">
+        <div data-iframe-width="150" data-iframe-height="270"
+             data-share-badge-id="fd3281ad-4f7c-4850-a791-595c473151ee"
              data-share-badge-host="https://www.credly.com"></div>
         <script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>
       </div>
