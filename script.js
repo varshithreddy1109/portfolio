@@ -390,63 +390,63 @@ function toggleCredlyBadge(id) {
 }
 /* ──────────────────────────────────────────────────────────
    THEME SWITCHER
-   Three themes: default | console | clean
-   Persisted in localStorage under key "portfolio-theme"
+   Persists selection in localStorage under "portfolio-theme".
+   Applies [data-theme] attribute to <html> (or removes it for
+   "default"). Also updates particle canvas colour.
    ────────────────────────────────────────────────────────── */
 (function () {
-  const STORAGE_KEY = "portfolio-theme";
-  const VALID_THEMES = ["default", "console", "clean"];
-  const root = document.documentElement;
+  const STORAGE_KEY   = 'portfolio-theme';
+  const VALID_THEMES  = ['default', 'console', 'clean'];
+  const root          = document.documentElement;
 
-  // Apply a theme immediately (no transition) or smoothly
+  // Map theme → particle RGB string
+  const PARTICLE_COLORS = {
+    'default': '0, 229, 255',
+    'console': '78, 201, 176',
+    'clean':   '37, 99, 235'
+  };
+
   function applyTheme(theme, animate) {
-    if (!VALID_THEMES.includes(theme)) theme = "default";
+    if (!VALID_THEMES.includes(theme)) theme = 'default';
 
     if (animate) {
-      document.body.classList.add("theme-transitioning");
-      setTimeout(() => document.body.classList.remove("theme-transitioning"), 400);
+      document.body.classList.add('theme-transitioning');
+      setTimeout(function () {
+        document.body.classList.remove('theme-transitioning');
+      }, 400);
     }
 
-    if (theme === "default") {
-      root.removeAttribute("data-theme");
+    // Set or remove data-theme on <html>
+    if (theme === 'default') {
+      root.removeAttribute('data-theme');
     } else {
-      root.setAttribute("data-theme", theme);
+      root.setAttribute('data-theme', theme);
     }
 
-    // Update particle colours to match the active theme
-    updateParticleColor(theme);
+    // Update canvas particle colour
+    window._particleColor = PARTICLE_COLORS[theme] || PARTICLE_COLORS['default'];
 
-    // Update active button state
-    document.querySelectorAll(".theme-btn").forEach(btn => {
-      btn.classList.toggle("active", btn.dataset.theme === theme);
+    // Sync button active states
+    document.querySelectorAll('.theme-btn').forEach(function (btn) {
+      btn.classList.toggle('active', btn.dataset.theme === theme);
     });
 
-    // Active nav highlight uses CSS var — force a repaint for colour update
-    document.querySelectorAll(".nav-links a").forEach(a => {
-      a.style.color = "";
+    // Reset inline colour on nav links so CSS takes over cleanly
+    document.querySelectorAll('.nav-links a').forEach(function (a) {
+      a.style.color = '';
     });
 
     localStorage.setItem(STORAGE_KEY, theme);
   }
 
-  // Update particle canvas colours to match theme
-  function updateParticleColor(theme) {
-    // The particle draw() function reads these at runtime from the window
-    if (theme === "console") {
-      window._particleColor = "78, 201, 176";   // teal
-    } else if (theme === "clean") {
-      window._particleColor = "37, 99, 235";    // blue
-    } else {
-      window._particleColor = "0, 229, 255";    // cyan (default)
-    }
-  }
-
-  // Attach click handlers
-  document.querySelectorAll(".theme-btn").forEach(btn => {
-    btn.addEventListener("click", () => applyTheme(btn.dataset.theme, true));
+  // Wire up buttons
+  document.querySelectorAll('.theme-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      applyTheme(btn.dataset.theme, true);
+    });
   });
 
-  // Restore persisted theme on load (no animation)
-  const saved = localStorage.getItem(STORAGE_KEY) || "default";
+  // Restore saved theme on page load (no transition flash)
+  var saved = localStorage.getItem(STORAGE_KEY) || 'default';
   applyTheme(saved, false);
 }());

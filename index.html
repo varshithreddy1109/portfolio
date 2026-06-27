@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Karri Varshith Reddy | Portfolio</title>
   <link rel="stylesheet" href="style.css" />
-  <!-- Google Fonts: Orbitron (display) + Syne (body) + JetBrains Mono (console) + Inter (clean) -->
+  <!-- Google Fonts: Orbitron + Syne (default) · JetBrains Mono (console) · Inter (clean) -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Syne:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <!-- Font Awesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
@@ -490,6 +490,8 @@
           <div class="corner br"></div>
         </div>
 
+        <!-- Add more cert-modal-card divs below for future certificates -->
+
         <!-- CERTIFICATE CARD: Google Prompting Essentials -->
         <div class="cert-modal-card reveal" data-cert="google-prompting">
           <div class="cert-card-ribbon">
@@ -513,8 +515,6 @@
           <div class="corner bl"></div>
           <div class="corner br"></div>
         </div>
-
-        <!-- Add more cert-modal-card divs below for future certificates -->
 
       </div>
     </div>
@@ -601,12 +601,8 @@
         <div>
           <h2>Google Prompting Essentials</h2>
           <div class="cert-modal-info-row">
-            <span class="cert-modal-info-item">
-              <i class="fas fa-university"></i> Coursera – Google
-            </span>
-            <span class="cert-modal-info-item">
-              <i class="fas fa-calendar-alt"></i> 2026
-            </span>
+            <span class="cert-modal-info-item"><i class="fas fa-university"></i> Coursera – Google</span>
+            <span class="cert-modal-info-item"><i class="fas fa-calendar-alt"></i> 2026</span>
           </div>
         </div>
       </div>
@@ -644,7 +640,6 @@
         </button>
       </div>
 
-      <!-- Credly badge embed (hidden until toggled) -->
       <div id="cert-badge-google-prompting" class="cert-badge-embed" style="display:none; margin-top:24px; text-align:center;">
         <div data-iframe-width="150" data-iframe-height="270"
              data-share-badge-id="fd3281ad-4f7c-4850-a791-595c473151ee"
@@ -656,7 +651,7 @@
   </div>
 
   <!-- ============================================================
-       CONTACT SECTION — Google Form embed
+       CONTACT SECTION — Netlify Form
   ============================================================ -->
   <section id="contact" class="section">
     <div class="container">
@@ -665,8 +660,7 @@
         <h2 class="section-title">Contact <span class="glow-text">Me</span></h2>
         <div class="section-line"></div>
       </div>
- 
-      <!-- Netlify Contact Form -->
+
       <div class="contact-outer reveal">
         <div class="contact-card">
           <div class="corner tl"></div>
@@ -674,37 +668,51 @@
           <div class="corner bl"></div>
           <div class="corner br"></div>
 
+          <!-- ── Netlify Form ──────────────────────────────────────────
+               Netlify detects this at build time via:
+                 · name="portfolio-contact"   → form name in dashboard
+                 · netlify + data-netlify="true" → activates Netlify Forms
+                 · hidden form-name input     → required for POST body matching
+               After submission Netlify redirects to /?success=true
+               The inline script below catches that and shows the
+               success state without a full page reload.
+          ──────────────────────────────────────────────────────────── -->
           <form
+            id="contactForm"
             name="portfolio-contact"
             method="POST"
+            action="/?success=true"
             netlify
             data-netlify="true"
             class="contact-form"
-            id="contactForm"
+            novalidate
           >
+            <!-- Required by Netlify for POST body identification -->
             <input type="hidden" name="form-name" value="portfolio-contact" />
 
             <div class="form-group">
               <label for="contact-name" class="form-label">Name</label>
               <input
-                type="text"
                 id="contact-name"
+                type="text"
                 name="name"
                 placeholder="Your full name"
                 class="form-input"
                 required
+                autocomplete="name"
               />
             </div>
 
             <div class="form-group">
               <label for="contact-email" class="form-label">Email</label>
               <input
-                type="email"
                 id="contact-email"
+                type="email"
                 name="email"
                 placeholder="your@email.com"
                 class="form-input"
                 required
+                autocomplete="email"
               />
             </div>
 
@@ -725,15 +733,18 @@
             </button>
           </form>
 
-          <!-- Success state (shown after Netlify redirect or JS intercept) -->
-          <div class="form-success" id="formSuccess" style="display:none;">
-            <div class="form-success-icon"><i class="fas fa-check-circle"></i></div>
+          <!-- Success state — hidden until ?success=true is detected -->
+          <div class="form-success" id="formSuccess" aria-live="polite">
+            <div class="form-success-icon">
+              <i class="fas fa-check-circle"></i>
+            </div>
             <h3>Message Sent!</h3>
-            <p>Thanks for reaching out. I'll get back to you soon.</p>
+            <p>Thanks for reaching out — I'll get back to you soon.</p>
           </div>
+
         </div>
       </div>
- 
+
     </div>
   </section>
  
@@ -759,17 +770,23 @@
   </footer>
  
   <script src="script.js"></script>
-  <!-- Netlify form success detection -->
+
+  <!-- ── Netlify form success detection ──────────────────────────────
+       Netlify redirects to the action URL (/?success=true) after submit.
+       We catch that here, show the success panel, hide the form, and
+       clean the URL so ?success=true never stays in the address bar.
+  ──────────────────────────────────────────────────────────────── -->
   <script>
     (function () {
-      // Netlify appends ?success after form submission redirect
-      if (window.location.search.includes('success')) {
-        var form = document.getElementById('contactForm');
+      if (new URLSearchParams(window.location.search).get('success') === 'true') {
+        var form    = document.getElementById('contactForm');
         var success = document.getElementById('formSuccess');
-        if (form) form.style.display = 'none';
+        if (form)    form.style.display    = 'none';
         if (success) success.style.display = 'flex';
-        // Clean URL without reloading
-        window.history.replaceState({}, document.title, window.location.pathname);
+        history.replaceState(null, '', window.location.pathname);
+        // Scroll to contact section so user sees the success message
+        var section = document.getElementById('contact');
+        if (section) setTimeout(function () { section.scrollIntoView({ behavior: 'smooth' }); }, 100);
       }
     }());
   </script>
