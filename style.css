@@ -1832,14 +1832,16 @@ img { max-width: 100%; }
    ============================================================ */
 
 /* Outer centering wrapper */
-.gform-outer {
+/* ============================================================
+   CONTACT FORM — Native Netlify Form
+   ============================================================ */
+.contact-outer {
   display: flex;
   justify-content: center;
   padding: 0 16px;
 }
 
-/* Glassmorphism card wrapping the iframe */
-.gform-card {
+.contact-card {
   position: relative;
   width: 100%;
   max-width: 700px;
@@ -1847,43 +1849,243 @@ img { max-width: 100%; }
   backdrop-filter: blur(16px);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  padding: 32px;
+  padding: 48px 40px;
   transition: var(--transition);
 }
 
-.gform-card:hover {
+.contact-card:hover {
   border-color: var(--border-hover);
   box-shadow: var(--glow-cyan);
 }
 
-/* Scrollable inner container */
-.gform-inner {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-  border-radius: 8px;
+/* ── Form layout ── */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
-/* The iframe — always fills the card width */
-.gform-inner iframe {
-  display: block;
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-label {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--cyan);
+  opacity: 0.85;
+}
+
+/* ── Inputs & textarea ── */
+.form-input {
   width: 100%;
-  min-width: 0;
-  height: 645px;
-  border: none;
-  border-radius: 8px;
-  background: transparent;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  outline: none;
+  transition: var(--transition);
+  box-sizing: border-box;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.form-input::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.6;
+}
+
+.form-input:hover {
+  border-color: var(--border-hover);
+}
+
+.form-input:focus {
+  border-color: var(--cyan);
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 0 3px rgba(var(--cyan-rgb, 0, 229, 255), 0.1);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 140px;
+  max-height: 340px;
+  line-height: 1.7;
+}
+
+/* ── Submit button — reuses existing .btn.btn-primary.btn-full ── */
+.form-submit {
+  margin-top: 4px;
+  gap: 10px;
+  font-size: 0.88rem;
+  padding: 15px 28px;
+  letter-spacing: 1px;
+}
+
+/* ── Success state ── */
+.form-success {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 48px 24px;
+  gap: 16px;
+}
+
+.form-success-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: rgba(0, 229, 255, 0.08);
+  border: 2px solid var(--cyan);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: var(--cyan);
+  box-shadow: var(--glow-cyan);
+  animation: successPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes successPop {
+  from { transform: scale(0.5); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+
+.form-success h3 {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.form-success p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin: 0;
 }
 
 /* ── Mobile ── */
 @media (max-width: 700px) {
-  .gform-card {
-    padding: 20px 12px;
+  .contact-card {
+    padding: 32px 20px;
     border-radius: var(--radius);
   }
-  .gform-inner iframe {
-    height: 700px;
+  .form-input {
+    padding: 12px 14px;
+    font-size: 0.85rem;
   }
+}
+
+/* ── Theme: Dev Console overrides ── */
+[data-theme="console"] .contact-card {
+  background: #252526;
+  border: 1px solid rgba(78, 201, 176, 0.15);
+  border-left: 3px solid #569cd6;
+}
+
+[data-theme="console"] .contact-card:hover {
+  border-left-color: #4ec9b0;
+  box-shadow: -4px 0 12px rgba(78, 201, 176, 0.15), 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="console"] .form-label {
+  color: #6a9955;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.5px;
+  text-transform: none;
+}
+
+[data-theme="console"] .form-label::before {
+  content: '// ';
+  opacity: 0.7;
+}
+
+[data-theme="console"] .form-input {
+  background: rgba(0, 0, 0, 0.25);
+  border-color: rgba(78, 201, 176, 0.18);
+  color: #d4d4d4;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.82rem;
+  border-radius: 4px;
+}
+
+[data-theme="console"] .form-input::placeholder {
+  color: #555;
+}
+
+[data-theme="console"] .form-input:hover {
+  border-color: rgba(78, 201, 176, 0.4);
+}
+
+[data-theme="console"] .form-input:focus {
+  border-color: #4ec9b0;
+  background: rgba(0, 0, 0, 0.35);
+  box-shadow: 0 0 0 3px rgba(78, 201, 176, 0.1);
+}
+
+[data-theme="console"] .form-success-icon {
+  background: rgba(78, 201, 176, 0.08);
+  border-color: #4ec9b0;
+  color: #4ec9b0;
+  box-shadow: 0 0 20px rgba(78, 201, 176, 0.2);
+}
+
+/* ── Theme: Clean Engineer overrides ── */
+[data-theme="clean"] .contact-card {
+  background: #ffffff;
+  border: 1px solid rgba(37, 99, 235, 0.1);
+  box-shadow: 0 1px 4px rgba(37, 99, 235, 0.06), 0 4px 20px rgba(37, 99, 235, 0.04);
+}
+
+[data-theme="clean"] .contact-card:hover {
+  border-color: rgba(37, 99, 235, 0.25);
+  box-shadow: 0 8px 32px rgba(37, 99, 235, 0.14);
+}
+
+[data-theme="clean"] .form-label {
+  color: #2563eb;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 1px;
+}
+
+[data-theme="clean"] .form-input {
+  background: #f8f9fc;
+  border-color: rgba(37, 99, 235, 0.14);
+  color: #0f172a;
+  font-family: 'Inter', sans-serif;
+  border-radius: 10px;
+}
+
+[data-theme="clean"] .form-input::placeholder {
+  color: #94a3b8;
+}
+
+[data-theme="clean"] .form-input:hover {
+  border-color: rgba(37, 99, 235, 0.3);
+}
+
+[data-theme="clean"] .form-input:focus {
+  border-color: #2563eb;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+[data-theme="clean"] .form-success-icon {
+  background: rgba(37, 99, 235, 0.07);
+  border-color: #2563eb;
+  color: #2563eb;
+  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.2);
 }
 
 /* ============================================================
@@ -2242,8 +2444,7 @@ body.theme-transitioning * {
 [data-theme="console"] .exp-modal-card,
 [data-theme="console"] .cert-modal-card,
 [data-theme="console"] .exp-placeholder,
-[data-theme="console"] .cert-placeholder,
-[data-theme="console"] .gform-card {
+[data-theme="console"] .cert-placeholder {
   background: #252526;
   border: 1px solid rgba(78,201,176,0.15);
   border-radius: 6px;
@@ -2625,11 +2826,7 @@ body.theme-transitioning * {
   background: rgba(10,10,10,0.9);
 }
 
-/* ── Console: gform ── */
-[data-theme="console"] .gform-card:hover {
-  border-color: rgba(78,201,176,0.4);
-  box-shadow: -4px 0 12px rgba(78,201,176,0.12);
-}
+/* ── Console: contact card ── (handled in contact form section below) */
 
 /* ============================================================
    THEME 3: CLEAN ENGINEER (Light)
@@ -2816,8 +3013,7 @@ body.theme-transitioning * {
 [data-theme="clean"] .cert-modal-card,
 [data-theme="clean"] .exp-placeholder,
 [data-theme="clean"] .cert-placeholder,
-[data-theme="clean"] .about-avatar-card,
-[data-theme="clean"] .gform-card {
+[data-theme="clean"] .about-avatar-card {
   background: #ffffff;
   border: 1px solid rgba(37,99,235,0.1);
   box-shadow: 0 1px 4px rgba(37,99,235,0.06), 0 4px 20px rgba(37,99,235,0.04);
@@ -3186,9 +3382,5 @@ body.theme-transitioning * {
   [data-theme="clean"] .nav-links a { color: #0f172a; }
 }
 
-/* ── Clean: gform ── */
-[data-theme="clean"] .gform-card:hover {
-  border-color: rgba(37,99,235,0.25);
-  box-shadow: 0 12px 40px rgba(37,99,235,0.1);
-}
+/* ── Clean: contact card ── (handled in contact form section below) */
 
