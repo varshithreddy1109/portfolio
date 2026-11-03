@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://varshithreddy.in/sitemap.xml
