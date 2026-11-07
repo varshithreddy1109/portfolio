@@ -27,7 +27,7 @@ navLinks.querySelectorAll("a").forEach(link => {
 });
 
 /* ──────────────────────────────────────────────────────────
-   3. PARTICLE + NEURAL NETWORK CANVAS
+   2. PARTICLE + NEURAL NETWORK CANVAS
    ────────────────────────────────────────────────────────── */
 const canvas = document.getElementById("particleCanvas");
 const ctx    = canvas.getContext("2d");
@@ -106,7 +106,7 @@ initParticles();
 animate();
 
 /* ──────────────────────────────────────────────────────────
-   4. TYPING ANIMATION
+   3. TYPING ANIMATION
    ────────────────────────────────────────────────────────── */
 const typingEl  = document.getElementById("typingText");
 const phrases   = [
@@ -119,6 +119,7 @@ const phrases   = [
 let phraseIdx = 0, charIdx = 0, isDeleting = false;
 
 function typeLoop() {
+  if (!typingEl) return;
   const current = phrases[phraseIdx];
   if (!isDeleting) {
     typingEl.textContent = current.slice(0, ++charIdx);
@@ -142,13 +143,12 @@ function typeLoop() {
 typeLoop();
 
 /* ──────────────────────────────────────────────────────────
-   5. SCROLL REVEAL (IntersectionObserver)
+   4. SCROLL REVEAL (IntersectionObserver)
    ────────────────────────────────────────────────────────── */
 const revealObserver = new IntersectionObserver(
   (entries) => {
-    entries.forEach((entry, i) => {
+    entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        // Stagger sibling reveals
         const siblings = entry.target.parentElement.querySelectorAll(".reveal");
         let delay = 0;
         siblings.forEach((sib, idx) => {
@@ -167,15 +167,17 @@ const revealObserver = new IntersectionObserver(
 document.querySelectorAll(".reveal").forEach(el => revealObserver.observe(el));
 
 /* ──────────────────────────────────────────────────────────
-   6. SKILL BAR FILL (animate when visible)
+   5. SKILL BAR FILL (animate when visible)
    ────────────────────────────────────────────────────────── */
 const skillObserver = new IntersectionObserver(
   (entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         const fill  = entry.target.querySelector(".skill-fill");
-        const width = fill.getAttribute("data-width");
-        fill.style.width = width + "%";
+        if (fill) {
+          const width = fill.getAttribute("data-width");
+          fill.style.width = width + "%";
+        }
         skillObserver.unobserve(entry.target);
       }
     });
@@ -186,11 +188,7 @@ const skillObserver = new IntersectionObserver(
 document.querySelectorAll(".skill-card").forEach(card => skillObserver.observe(card));
 
 /* ──────────────────────────────────────────────────────────
-   7. PROJECT MODALS
-   ─────────────────────────────────────────────────────────
-   Each .proj-card has data-project="id". The matching modal
-   has id="modal-{id}". Clicking the card opens the modal;
-   clicking the overlay or close button closes it.
+   6. PROJECT MODALS
    ────────────────────────────────────────────────────────── */
 function openModal(id) {
   const modal = document.getElementById("modal-" + id);
@@ -233,20 +231,17 @@ document.addEventListener("keydown", e => {
     document.querySelectorAll(".proj-modal.open").forEach(modal => {
       closeModal(modal.id.replace("modal-", ""));
     });
+    document.querySelectorAll(".cert-modal.open").forEach(modal => {
+      closeCertModal(modal.id.replace("certmodal-", ""));
+    });
+    document.querySelectorAll(".exp-modal.open").forEach(modal => {
+      closeExpModal(modal.id.replace("expmodal-", ""));
+    });
   }
 });
 
 /* ──────────────────────────────────────────────────────────
-   7. RESUME BUTTON
-   ─────────────────────────────────────────────────────────
-   The "View Resume" button in the HTML is a plain <a> tag
-   with target="_blank", so no JS handler is needed.
-   To update the link, change the href in index.html on the
-   #resumeBtn element to your hosted PDF URL.
-   ────────────────────────────────────────────────────────── */
-
-/* ──────────────────────────────────────────────────────────
-   9. SMOOTH SCROLL for anchor links
+   7. SMOOTH SCROLL for anchor links
    ────────────────────────────────────────────────────────── */
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener("click", function (e) {
@@ -260,9 +255,9 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 /* ──────────────────────────────────────────────────────────
-   10. ACTIVE NAV LINK HIGHLIGHT on scroll
+   8. ACTIVE NAV LINK HIGHLIGHT on scroll
    ────────────────────────────────────────────────────────── */
-const sections  = document.querySelectorAll("section[id]");
+const sections   = document.querySelectorAll("section[id]");
 const navAnchors = document.querySelectorAll(".nav-links a");
 
 const sectionObserver = new IntersectionObserver(
@@ -282,10 +277,7 @@ const sectionObserver = new IntersectionObserver(
 sections.forEach(s => sectionObserver.observe(s));
 
 /* ──────────────────────────────────────────────────────────
-   EXPERIENCE MODALS
-   ─────────────────────────────────────────────────────────
-   Each .exp-modal-card has data-exp="id". The matching modal
-   has id="expmodal-{id}". Works identically to project modals.
+   9. EXPERIENCE MODALS
    ────────────────────────────────────────────────────────── */
 function openExpModal(id) {
   const modal = document.getElementById("expmodal-" + id);
@@ -320,12 +312,7 @@ document.querySelectorAll(".exp-modal .exp-modal-close").forEach(btn => {
 });
 
 /* ──────────────────────────────────────────────────────────
-   CERTIFICATE MODALS
-   ─────────────────────────────────────────────────────────
-   Each .cert-modal-card has data-cert="id". The matching modal
-   has id="certmodal-{id}". Works identically to project modals.
-   Popup contains: institution, date, skills, description,
-   View Certificate button (always), View Badge button (optional).
+   10. CERTIFICATE MODALS
    ────────────────────────────────────────────────────────── */
 function openCertModal(id) {
   const modal = document.getElementById("certmodal-" + id);
@@ -359,22 +346,8 @@ document.querySelectorAll(".cert-modal .cert-modal-close").forEach(btn => {
   });
 });
 
-// Add Escape key support for exp and cert modals
-document.addEventListener("keydown", e => {
-  if (e.key === "Escape") {
-    document.querySelectorAll(".exp-modal.open").forEach(modal => {
-      closeExpModal(modal.id.replace("expmodal-", ""));
-    });
-    document.querySelectorAll(".cert-modal.open").forEach(modal => {
-      closeCertModal(modal.id.replace("certmodal-", ""));
-    });
-  }
-});
-
 /* ──────────────────────────────────────────────────────────
-   CREDLY BADGE TOGGLE
-   Toggles the embedded badge panel inside a cert modal.
-   Called by: onclick="toggleCredlyBadge('google-ai')"
+   11. CREDLY BADGE TOGGLE
    ────────────────────────────────────────────────────────── */
 function toggleCredlyBadge(id) {
   const panel = document.getElementById("cert-badge-" + id);
@@ -388,18 +361,15 @@ function toggleCredlyBadge(id) {
       : '<i class="fas fa-shield-alt"></i> View Badge';
   }
 }
+
 /* ──────────────────────────────────────────────────────────
-   THEME SWITCHER
-   Persists selection in localStorage under "portfolio-theme".
-   Applies [data-theme] attribute to <html> (or removes it for
-   "default"). Also updates particle canvas colour.
+   12. THEME SWITCHER
    ────────────────────────────────────────────────────────── */
 (function () {
   const STORAGE_KEY   = 'portfolio-theme';
   const VALID_THEMES  = ['default', 'console', 'clean'];
   const root          = document.documentElement;
 
-  // Map theme → particle RGB string
   const PARTICLE_COLORS = {
     'default': '0, 229, 255',
     'console': '78, 201, 176',
@@ -416,22 +386,18 @@ function toggleCredlyBadge(id) {
       }, 400);
     }
 
-    // Set or remove data-theme on <html>
     if (theme === 'default') {
       root.removeAttribute('data-theme');
     } else {
       root.setAttribute('data-theme', theme);
     }
 
-    // Update canvas particle colour
     window._particleColor = PARTICLE_COLORS[theme] || PARTICLE_COLORS['default'];
 
-    // Sync button active states
     document.querySelectorAll('.theme-btn').forEach(function (btn) {
       btn.classList.toggle('active', btn.dataset.theme === theme);
     });
 
-    // Reset inline colour on nav links so CSS takes over cleanly
     document.querySelectorAll('.nav-links a').forEach(function (a) {
       a.style.color = '';
     });
@@ -439,14 +405,12 @@ function toggleCredlyBadge(id) {
     localStorage.setItem(STORAGE_KEY, theme);
   }
 
-  // Wire up buttons
   document.querySelectorAll('.theme-btn').forEach(function (btn) {
     btn.addEventListener('click', function () {
       applyTheme(btn.dataset.theme, true);
     });
   });
 
-  // Restore saved theme on page load (no transition flash)
-  var saved = localStorage.getItem(STORAGE_KEY) || 'default';
+  const saved = localStorage.getItem(STORAGE_KEY) || 'default';
   applyTheme(saved, false);
 }());
