@@ -26,6 +26,14 @@ navLinks.querySelectorAll("a").forEach(link => {
   });
 });
 
+// Close mobile menu when clicking outside
+document.addEventListener("click", (e) => {
+  if (navLinks.classList.contains("open") && !navbar.contains(e.target)) {
+    hamburger.classList.remove("active");
+    navLinks.classList.remove("open");
+  }
+});
+
 /* ──────────────────────────────────────────────────────────
    2. PARTICLE + NEURAL NETWORK CANVAS
    ────────────────────────────────────────────────────────── */
@@ -248,33 +256,48 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     const target = document.querySelector(this.getAttribute("href"));
     if (!target) return;
     e.preventDefault();
-    const offset = 72; // navbar height
+    const isClean = document.documentElement.getAttribute('data-theme') === 'clean';
+    const offset = isClean ? 64 : 95; // 64px for slim Apple bar, 95px for floating pill
     const top    = target.getBoundingClientRect().top + window.pageYOffset - offset;
     window.scrollTo({ top, behavior: "smooth" });
   });
 });
 
 /* ──────────────────────────────────────────────────────────
-   8. ACTIVE NAV LINK HIGHLIGHT on scroll
+   8. ACTIVE NAV LINK HIGHLIGHT on scroll & click
    ────────────────────────────────────────────────────────── */
 const sections   = document.querySelectorAll("section[id]");
 const navAnchors = document.querySelectorAll(".nav-links a");
 
-const sectionObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const id = entry.target.getAttribute("id");
-        navAnchors.forEach(a => {
-          a.style.color = a.getAttribute("href") === `#${id}` ? "var(--cyan)" : "";
-        });
+function updateActiveNav() {
+  const isClean = document.documentElement.getAttribute('data-theme') === 'clean';
+  const scrollPos = window.scrollY + (isClean ? 100 : 140);
+  let currentId = "home";
+
+  // Check if near the bottom of the page -> activate contact
+  const isBottom = (window.innerHeight + window.scrollY) >= (document.documentElement.scrollHeight - 60);
+  if (isBottom) {
+    currentId = "contact";
+  } else {
+    sections.forEach((section) => {
+      const top = section.offsetTop;
+      const height = section.offsetHeight;
+      if (scrollPos >= top && scrollPos < top + height) {
+        currentId = section.getAttribute("id");
       }
     });
-  },
-  { threshold: 0.4 }
-);
+  }
 
-sections.forEach(s => sectionObserver.observe(s));
+  navAnchors.forEach((a) => {
+    const href = a.getAttribute("href");
+    const isActive = href === `#${currentId}`;
+    a.classList.toggle("active", isActive);
+  });
+}
+
+window.addEventListener("scroll", updateActiveNav, { passive: true });
+window.addEventListener("load", updateActiveNav);
+updateActiveNav();
 
 /* ──────────────────────────────────────────────────────────
    9. EXPERIENCE MODALS
@@ -373,7 +396,7 @@ function toggleCredlyBadge(id) {
   const PARTICLE_COLORS = {
     'default': '0, 229, 255',
     'console': '78, 201, 176',
-    'clean':   '37, 99, 235'
+    'clean':   '0, 113, 227'
   };
 
   function applyTheme(theme, animate) {
@@ -401,6 +424,10 @@ function toggleCredlyBadge(id) {
     document.querySelectorAll('.nav-links a').forEach(function (a) {
       a.style.color = '';
     });
+
+    if (typeof updateActiveNav === 'function') {
+      updateActiveNav();
+    }
 
     localStorage.setItem(STORAGE_KEY, theme);
   }

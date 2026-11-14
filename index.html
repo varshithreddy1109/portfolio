@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Karri Varshith Reddy | Portfolio</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="terminal.css" />
   <!-- Google Fonts: Orbitron + Syne (default) · JetBrains Mono (console) · Inter (clean) -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Syne:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <!-- Font Awesome for icons -->
@@ -28,22 +29,24 @@
         <li><a href="#certificates">Certificates</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
-      <!-- Theme Switcher -->
-      <div class="theme-switcher" id="themeSwitcher" role="group" aria-label="Theme switcher">
-        <button class="theme-btn active" data-theme="default" title="Default — Neon Dark" aria-label="Default theme">
-          <span class="theme-icon">◈</span>
-        </button>
-        <button class="theme-btn" data-theme="console" title="Dev Console — Code Editor" aria-label="Dev Console theme">
-          <span class="theme-icon">&gt;_</span>
-        </button>
-        <button class="theme-btn" data-theme="clean" title="Clean Engineer — Light" aria-label="Clean Engineer theme">
-          <span class="theme-icon">◻</span>
+      <!-- Theme Switcher & Actions -->
+      <div class="nav-actions">
+        <div class="theme-switcher" id="themeSwitcher" role="group" aria-label="Theme switcher">
+          <button class="theme-btn active" data-theme="default" title="Default — Neon Dark" aria-label="Default theme">
+            <span class="theme-icon">◈</span>
+          </button>
+          <button class="theme-btn" data-theme="console" title="Dev Console — Code Editor" aria-label="Dev Console theme">
+            <span class="theme-icon">&gt;_</span>
+          </button>
+          <button class="theme-btn" data-theme="clean" title="Clean — Apple Minimalist Light" aria-label="Apple Minimalist Light theme">
+            <span class="theme-icon">◻</span>
+          </button>
+        </div>
+
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
         </button>
       </div>
-
-      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
-        <span></span><span></span><span></span>
-      </button>
     </div>
   </nav>
  
@@ -898,11 +901,14 @@
         <a href="https://github.com/varshithreddy1109" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="social-btn">
           <img src="image/githublogo.svg" alt="GitHub" class="social-svg social-svg--github" />
         </a>
-        <a href="https://www.linkedin.com/in/karri-varshith-reddy-326008414/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="social-btn">
+        <a href="https://www.linkedin.com/in/karrivarshithreddy/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="social-btn">
           <img src="image/linkedinlogo.svg" alt="LinkedIn" class="social-svg social-svg--linkedin" />
         </a>
         <a href="mailto:varshithreddy1206@gmail.com" aria-label="Email" class="social-btn">
           <img src="image/maillogo.svg" alt="Email" class="social-svg social-svg--email" />
+        </a>
+        <a href="https://varshithtechjournal.hashnode.dev/" target="_blank" rel="noopener noreferrer" aria-label="Blog" class="social-btn">
+          <i class="fas fa-rss" style="font-size:1.1rem;"></i>
         </a>
       </div>
       <p class="footer-tagline">Built with <span class="glow-text">passion</span> &amp; code.</p>
@@ -910,6 +916,7 @@
   </footer>
  
   <script src="script.js"></script>
+  <script src="terminal.js"></script>
 
   <!-- Netlify form success detection -->
   <script>
